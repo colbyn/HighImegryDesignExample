@@ -8,16 +8,16 @@ body {
     background-image: linear-gradient(
     0deg,
     hsl(200deg 38% 18%) 0%,
-    hsl(204deg 32% 20%) 10%,
-    hsl(207deg 27% 22%) 20%,
-    hsl(212deg 23% 24%) 30%,
-    hsl(217deg 19% 25%) 40%,
-    hsl(223deg 15% 27%) 50%,
-    hsl(220deg 16% 24%) 60%,
-    hsl(218deg 17% 21%) 70%,
-    hsl(216deg 18% 18%) 80%,
-    hsl(214deg 19% 15%) 90%,
-    hsl(212deg 20% 13%) 100%
+    hsl(205deg 30% 21%) 10%,
+    hsl(212deg 23% 24%) 20%,
+    hsl(220deg 17% 26%) 30%,
+    hsl(220deg 16% 24%) 40%,
+    hsl(217deg 18% 20%) 50%,
+    hsl(214deg 19% 15%) 60%,
+    hsl(213deg 22% 16%) 70%,
+    hsl(217deg 24% 26%) 80%,
+    hsl(221deg 23% 38%) 90%,
+    hsl(228deg 21% 51%) 100%
   );
 }
 
