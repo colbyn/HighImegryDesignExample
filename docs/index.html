@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Website Title</title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href=
+  "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap"
+  rel="stylesheet">
+  <style>
+    html {
+        box-sizing: border-box;
+    }
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+  </style>
+  <link rel="stylesheet" href="templates/default/typography.css">
+  <link rel="stylesheet" href="templates/default/layout.css">
+  <link rel="stylesheet" type="text/css" href="pages/index.css">
+  <link rel="stylesheet" type="text/css" href="fragments/homepage/hero.css">
+  <link rel="stylesheet" type="text/css" href="fragments/homepage/products.css">
+  <style>
+  header.floating {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 1;
+    position: absolute;
+  }
+
+  header.floating button.open-nav {
+    background: #00000075;
+    color: #fff;
+    border: 1px solid #ffffff8c;
+    font-size: 2rem;
+    padding: 0.1rem 0.8rem;
+    box-shadow: 0 0 6px 1px #838383;
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  header.floating button.open-nav:active,
+  header.floating button.open-nav.tap {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 10px 2px #fff;
+  }
+  </style>
+</head>
+<body>
+  <header class="floating">
+    <button class="open-nav" style="padding-bottom: 4px;">☰</button>
+  </header>
+  <script>
+  const btn = document.querySelector('.open-nav');
+  btn.addEventListener('click', () => {
+    btn.classList.add('tap');
+    setTimeout(() => btn.classList.remove('tap'), 150);
+  });
+  </script>
+  <div class="hero wrapper">
+  <p class="leftward">[ALIGNED LEFT]</p>
+  <h1>My Name</h1>
+  <p class="rightward">[ALIGNED RIGHT]</p><img src="assets/mouse.png" class="mouse-icon"></div>
+  <main>
+    <section class="centered">
+      <div class="text-block">
+        <header>
+          <h2>Rock-Couture</h2>
+          <p>Born in salt. Built to strike.</p>
+        </header>
+        <p>Movement is power. Fabric is armor. Everything made to survive light, pressure, and attention.</p>
+      </div><img src="assets/photos/dress-store.png" alt="transparent image of a black dress" style=
+      "box-shadow: unset; border: unset;">
+    </section>
+    <section>
+      <div class="text-block">
+        <header>
+          <h2>BLACKFIN</h2>
+          <p>Spring / Summer 20XX</p>
+        </header>
+        <p>Sharp lines. Wet shine. Cuts built for motion. Nothing soft, nothing safe.</p>
+      </div><img src="assets/photos/homepage-2.jpg" alt="">
+    </section>
+    <section>
+      <div class="text-block">
+        <header>
+          <h2>The Collection</h2>
+        </header>
+        <p>Gloss leather. Steel chain. Deep-water blue. Each piece built like muscle — tight, fast, alive.</p>
+      </div><img src="assets/photos/homepage-3.jpg" alt="" style="max-width: 500px;">
+    </section>
+    <section>
+      <div class="text-block">
+        <header>
+          <h2>The Designer</h2>
+          <p>My Name</p>
+        </header>
+        <p>I make things that bite back.</p>
+      </div><img src="assets/photos/homepage-4.jpg" alt="">
+    </section>
+    <section>
+      <div class="text-block">
+        <header>
+          <h2>The Creed</h2>
+        </header>
+        <p>Rock-Couture is motion and defiance. Sound turned into skin. Pressure made wearable.</p>
+      </div><img src="assets/photos/homepage-5.jpg" alt="">
+    </section>
+  </main>
+</body>
+</html>

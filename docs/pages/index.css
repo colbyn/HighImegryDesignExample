@@ -1,0 +1,26 @@
+/* ------------------------------------------------------------------------- */
+/* ROOT DESIGN */
+/* ------------------------------------------------------------------------- */
+
+/* :root {
+    --site-bg-color: #ffffff;
+    --site-fg-color: #ffffffcc;
+    --site-border-color: #c4c4c4;
+    --site-margin-length: 1.0rem;
+    --site-vertical-gap-length: 1.0rem;
+}
+
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --site-bg-color: #191919;
+        --site-fg-color: #2925257a;
+        --site-border-color: #2f5066;
+    }
+} */
+
+
+/* ------------------------------------------------------------------------- */
+/* CONTENT LAYOUT */
+/* ------------------------------------------------------------------------- */
+
