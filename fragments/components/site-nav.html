@@ -1,0 +1,41 @@
+<header class="floating">
+    <button class="open-nav" style="padding-bottom: 4px;">☰</button>
+</header>
+
+<style>
+header.floating {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 1;
+    position: absolute;
+}
+
+header.floating button.open-nav {
+    background: #00000075;
+    color: #fff;
+    border: 1px solid #ffffff8c;
+    font-size: 2rem;
+    padding: 0.1rem 0.8rem;
+    box-shadow: 0 0 6px 1px #838383;
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+header.floating button.open-nav:active,
+header.floating button.open-nav.tap {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 10px 2px #fff;
+}
+</style>
+
+<script>
+const btn = document.querySelector('.open-nav');
+btn.addEventListener('click', () => {
+    btn.classList.add('tap');
+    setTimeout(() => btn.classList.remove('tap'), 150);
+});
+</script>

@@ -1,0 +1,286 @@
+<h1 class="title">
+    <a href="https://github.com/subscript-publishing/subscript">subscript-publishing/subscript</a>
+</h1>
+<p><strong>Welcome to the SubScript Note-Taking &amp; Content Publishing Tools</strong></p>
+<blockquote>
+    <p>
+        Tools to accommodate my preferred note-taking workflow, from beautifully typeset (but relatively time consuming) LaTeX math and other markup, to rapid hand drawn notes when time constrained — <strong>all in one and seamlessly intermixed</strong>.
+    </p>
+</blockquote>
+
+<p>Features</p>
+
+<p>Content publishing VIA Web-Technologies!</p>
+
+<p>
+    There are TONS of JS libs that do very specific things (for literally everything) that no-one ever uses outside perhaps an official web-app, for instance Desmos and GeoGebra are trivially embeddable but people hardly ever use their JS APIs. The goal of Subscript is to make this as convenient as possible with a declarative non-programming API for each. Something akin to e.g. exclusively using HTML tags for each in a declarative manner.
+</p>
+<p>
+    In a certain regard, SubScript is basically LaTeX, except, while you loose out on it&#39;s massive array of packages that do everything from math to extremely fine tuned musical notation rendering, you instead get a WIP LaTeX-like interface to the COLOSSAL JS ecosystem.
+</p>
+<ul>
+    <li>
+        For instance, need to publish content with musical notation? Maybe I&#39;ll one day add support for
+        <a href="https://www.vexflow.com">VexFlow</a>
+        so I say that Subscript supports rendering complex musical notation. Can markdown do that? Or better yet, will markdown ever do that?
+    </li>
+</ul>
+<p>
+    In 2022 popular markdown displays are finally getting support for displaying math, but it&#39;s still relatively limited with regards to the feature-set LaTeX provides.
+</p>
+<p>
+    The goal of Subscript is to be a <strong>monolithic publishing platform</strong> for everything under the sun, and by monolithic, I mean monolithic. While red flags may go off in your head, I&#39;ve tried AsciiDoc, and the problem with AsciiDoc is that it&#39;s both slow, incredibly slow after a while, and especially, there&#39;s no syntax highlighting or autocomplete of embedded content! In theory AsciiDoc&#39;s idea of extensibility sounds nice, it may please your enterprise system architect, but it leads to a multitude of annoyances (to say the least) that you simply don&#39;t have with LaTeX. Furthermore, AsciiDoc makes assumptions that wouldn&#39;t easily translate to a browser environment. Whereas a monolithic architecture entails end-to-end uniformity.
+</p>
+<p>
+    In theory, Markdown based content publishing tools has the same issue, I&#39;ve seen platforms built upon markdown with extra features, but will your stock markdown syntax highlighter support such? Whereas e.g. if you see a LaTeX package, odds are it supports the entirety of (Xe)LaTeX syntax and whatnot.
+</p>
+
+<p>Subscript Markup Language</p>
+
+<ul>
+    <li>Built upon LaTeX-ified HTML tags.<ul>
+            <li>Meta:<ul>
+                    <li>(Except in Subscript, instead of calling things like <code>\h1{…}</code> a tag, it&#39;s a
+                        command (you can go on calling it a tag, idc. Originally, in the compiler implementation I used
+                        the tag terminology for relevant names, but this was later changed without any particular
+                        conscious reason, perhaps&#39;s it was just less confusing given it&#39;s LaTeX-like syntax,
+                        regardless this is what stuck.)</li>
+                </ul>
+            </li>
+            <li>Therefore, in Subscript:<ul>
+                    <li>all command identifiers begin with a slash <code>\</code> (which is an easy trigger for
+                        auto-complete),</li>
+                    <li>while macros with specially implemented behavior (in the compiler) end in an exclamation mark
+                        (<code>!</code>) (inspired by rust).</li>
+                </ul>
+            </li>
+            <li><strong>A command is broken down into</strong> <code>\name[attributes]{arguments}</code></li>
+            <li>For instance,<ul>
+                    <li><code>\h1{Hello World}</code></li>
+                    <li><code>\include[src=&quot;./path/to/filename.ss&quot;]</code></li>
+                    <li><code>\layout[cols=3]{…}</code></li>
+                    <li><code>\frac{1}{2}</code></li>
+                </ul>
+            </li>
+            <li>Generally speaking:<ul>
+                    <li>For all HTML based commands, the overall format is<ul>
+                            <li><code>\name[attributes]{argument}</code> or <code>\name[attributes]</code></li>
+                        </ul>
+                    </li>
+                    <li>For all LaTeX based commands, the overall format is <ul>
+                            <li><code>\name[attributes]{arg1}{arg2}…{argN}</code></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Some commands are only available if it&#39;s nested under a <code>parent</code> command, for instance,
+                <code>\row</code> is only available if it&#39;s nested under a <code>\table</code> command. (It&#39;s a
+                variable arity/argument convenience command for creating a table row where each argument is
+                automatically wrapped in in a table-data element (if its not already), since HTML tables are very
+                verbose and I&#39;ve been trying to streamline their creation for fast notes).<ul>
+                    <li>(I call these convenience commands that simply expand out to more verbose HTML trees &quot;HTML
+                        sugar&quot;)</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Compile your notes to HTML webpages, or PDF files (very long-term WIP).</li>
+    <li>Seamlessly intermix markup with hand drawn content VIA the Subscript Freeform Tools (iPad only).</li>
+    <li>Seamless dark/light mode support throughout all subscript tools. </li>
+</ul>
+
+<p>Math Support</p>
+<table>
+    <thead>
+        <tr>
+            <th>Cmd</th>
+            <th>Type</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>\math{…}</code></td>
+            <td>Math Block</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><code>\{…}</code></td>
+            <td>Inline Math</td>
+            <td>Due to how frequently it&#39;s used, I made it&#39;s invocation as short as possible</td>
+        </tr>
+        <tr>
+            <td><code>\equation{…}</code></td>
+            <td>Math Block</td>
+            <td>The default environment is equivalent to LaTeX&#39;s equation + split env</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    Also the <code>\math</code> command support a few options for quickly defining common environments and whatnot, as shown in the following example (the <code>num</code> and <code>tag</code> options also work for <code>\equation</code>):
+</p>
+
+<img src="../../../assets/images/legacy/subscript/math-presets.png" alt="Presents syntax example" class="boxed">
+
+<p>Which results in:</p>
+
+<img src="../../../assets/images/legacy/subscript/math-presets-results.png" alt="Presents syntax example" class="boxed">
+
+<table>
+    <thead>
+        <tr>
+            <th>Value</th>
+            <th>Shorthand</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>equations</code></td>
+            <td><code>e</code></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><code>centered</code></td>
+            <td><code>c</code></td>
+        </tr>
+    </tbody>
+</table>
+<p>When I update the <code>\where!</code> macro to support rewriting attributes, you&#39;ll be able to use such to keep track of labels within a local expression. Which will be something akin to:</p>
+<img src="../../../assets/images/legacy/subscript/where-labels.png" alt="Where labels" class="boxed">
+<p>By default numbered expressions are turned off, because I want a better interface for such than what KaTeX provides.
+</p>
+<p>Layout</p>
+<p>Things can be broken down into newspaper like columns VIA the <code>\layout[col=num]</code> command, for instance,</p>
+
+<img src="../../../assets/images/legacy/subscript/newpaper-like-layout.png" alt="Where labels" class="floating">
+
+
+<p>
+    By default this also includes breakpoints that will decrement columns as the viewport width decreases until it breaks into single column mode.
+</p>
+
+<p>While the <code>\grid</code> command gives you access to very fine tuned CSS grids:</p>
+<img src="../../../assets/images/legacy/subscript/grid-layout.png" alt="Where labels" class="floating">
+
+<p>File Import Support With Relative Headings</p>
+<p>For example</p>
+<img src="../../../assets/images/legacy/subscript/include-syntax-example.png" alt="Include syntax example" class="boxed">
+
+<p>
+    Furthermore, this rule is recursively applied in a bottom-up fashion when files import other files that import other files and so forth (I really wish there were more HTML heading tags). So in any <code>.ss</code> file, always begin with H1 and decrement sub-headings relative to such (so the headings therefrom will result in the appropriate level in any given hierarchical context of file imports).
+</p>
+
+<p>Automatic Table Of Content Generation</p>
+
+<p>Currently being reimplemented to better handle multi-page and nested (hierarchical) page layouts.</p>
+
+<p>Currently looks like this (in dark mode):</p>
+<img src="../../../assets/images/legacy/subscript/toc-preview.png" alt="TOC example" class="floating">
+
+<p>Unicode Support and Typography:</p>
+
+<ul>
+    <li>The parser is based on the <code>unicode-segmentation</code> crate (which identifies Grapheme Cluster, Word and
+        Sentence boundaries according to Unicode Standard Annex #29 rules).</li>
+    <li>Unicode beautification of characters such as mapping <code>&quot;...&quot;</code> → <code>“…”</code></li>
+</ul>
+
+<p>Local (anonymous) rewrite rules (VIA the <code>\where!</code> macro):</p>
+
+<img src="../../../assets/images/legacy/subscript/where-cmd-syntax-example.png" alt="Where cmd syntax example" class="boxed">
+
+<p>
+    This was initially motivated by the ungodly mess that happened when I tried to color-code a complex bit of LaTeX math, where the resulting markup thereafter was incredibly hard to read... What I wanted was something akin to
+</p>
+
+<img src="../../../assets/images/legacy/subscript/where-cmd-syntax-example-2.png" alt="Where cmd syntax example" class="boxed">
+
+<p>Update</p>
+
+<p>
+    <strong>WARNING</strong>: I forgot to include ‘;’ at the end of each rewrite rule! Due to recent changes to the parser. It should instead look like this:
+</p>
+
+<img src="../../../assets/images/legacy/subscript/where-macro-updated.png" alt="Where macro update" class="boxed">
+
+<p>Integration with hand drawn notes VIA your iPad and Apple Pencil (With Dark/Light Mode Support!)</p>
+
+<p>For rapid note taking and freeform content creation such as diagrams and hand drawn visualizations. Which the Subscript Markup Language and compiler natively supports for seamless integration into your published content. </p>
+
+<img src="../../../assets/images/legacy/subscript/dark-canvas-preview.jpeg" alt="UI Editor Preview" class="boxed">
+
+<img src="../../../assets/images/legacy/subscript/light-canvas-preview.jpeg" alt="UI Editor Preview" class="boxed">
+
+<p>Safe your files to e.g. <code>iCloud Drive</code> and seamlessly include such in your notes </p>
+
+<img src="../../../assets/images/legacy/subscript/include-ss1-drawing-syntax-example.png" alt="Freeform drawing import example" class="boxed">
+
+<ul>
+    <li>Freeform files are essentially vector objects and are therefore resolution independent.</li>
+    <li>The strokes are rendered into relatively beautiful SVG paths (compared to other implementations out there that
+        used ugly fixed diameter strokes with hard cutoffs).</li>
+    <li>NOTE: It&#39;s not yet available on the App Store since dev licenses are expensive (but you don&#39;t need a dev
+        license to compile and run on your own iPad). Although if this project gains traction with users, I may
+        eventually publish such to the app store... </li>
+</ul>
+
+<p>Each freeform file can contain multiple drawing entries, which can be manipulated &amp; formatted like so (VIA the <code>\where!</code> macro):</p>
+<img src="../../../assets/images/legacy/subscript/drawing-import-with-rewrites-syntax-example.png" alt="Freeform drawing import example" class="boxed">
+
+<p>Notes:</p>
+<ul>
+    <li>
+        This interface is <strong>unstable and likely to change</strong> and may currently be broken.
+    </li>
+    <li>
+        At the time of this writing, drawing rewrite rules are only supported for <code>.ss1-drawing</code> files, since
+        <code>.ss1-composition</code> files are more complicated and I haven&#39;t worked out how the interface should work.
+    </li>
+</ul>
+
+<p>Drawing Editor Overview:</p>
+
+<img src="../../../assets/images/legacy/subscript/ios-editor-ui-info.jpeg" alt="IOS freeform/drawing UI Overview" class="boxed">
+
+<p>Regarding the pen list:</p>
+<ul>
+    <li><code>Foreground</code> pens point down</li>
+    <li><code>Background</code> pens point up</li>
+    <li>The <code>Foreground</code>/<code>Background</code> feature allows you to underline and highlight things and
+        have such highlights render ‘underneath’ foreground strokes (it just looks nicer). </li>
+</ul>
+<p>Page Layout Editor Overview</p>
+<blockquote>
+    <p>Note that the above was produced VIA an older version of the app that e.g. had no support for light/dark mode.
+    </p>
+    <p>This feature is specific to the ‘SubscriptComposition’ app.</p>
+</blockquote>
+
+<img src="../../../assets/images/legacy/subscript/ss-composition-ios-ui-info.jpeg" alt="IOS freeform/drawing UI Overview" class="boxed">
+
+<p><strong>Real World Example - My old chem notes:</strong></p>
+<ul>
+    <li><a href="https://content.subscript.app/dev/chemistry-1010---fall-2021/week-14-acids-and-bases.html">E.g. 1</a>
+    </li>
+    <li><a href="https://content.subscript.app/dev/chemistry-1010---fall-2021/overview.html">E.g. 2</a></li>
+    <li><a
+            href="https://content.subscript.app/dev/chemistry-1010---fall-2021/week-9--wonders-of-water.html#Shapes-of-Molecules-and-Polarity">E.g.
+            3</a></li>
+    <li><a href="https://content.subscript.app/dev/chemistry-1010---fall-2021/week-6:-the-language-of-chemistry.html">E.g.
+            4</a></li>
+    <li><a
+            href="https://content.subscript.app/dev/chemistry-1010---fall-2021/week-7---chemical-reactions-and-stoichiometry.html">E.g.
+            5</a></li>
+    <li><a href="https://content.subscript.app/dev/chemistry-1010---fall-2021/index.html">Everything</a>
+        <blockquote>
+            <p>Note that this was produced VIA an older version of the app (and therefore e.g. had no support for
+                light/dark mode), </p>
+        </blockquote>
+    </li>
+</ul>
+
+<p>PDF Support WIP:</p>
+<img src="../../../assets/images/legacy/subscript/latex-issue.jpg" alt="Include syntax example" class="boxed">
+

@@ -1,0 +1,54 @@
+<h1 class="title">
+    <a href="https://imager.io" target="_blank">Imager</a>
+</h1>
+
+<p class="no-break">
+    <a href="https://imager.io" target="_blank">
+        <code class="link-text">imager.io</code>
+    </a>
+    &nbsp;|&nbsp;
+    <a href="https://github.com/imager-io" target="_blank">
+        <code class="link-text">github.com/imager-io</code>
+    </a>
+</p>
+
+<p>Automated image compression for efficiently distributing images on the web.</p>
+
+<p>See my Medium article: <a href="https://medium.com/@colbyn/modern-image-optimization-for-2020-issues-solutions-and-open-source-solutions-543af00e3e51" target="_blank">Modern Image Optimization for 2020- Issues, Solutions, and Open Source solutions</a></p>
+
+
+<p>Notably includes a tool called <a href="https://github.com/imager-io/imager" target="_blank">imager</a> for optimizing the binary encoding of images in a brute force trial ’n error sorta manner, using a new (at that time) ML based perceptual quality metric designed to be a more accurate model of human perception compared to prior formulaic approaches.</p>
+
+<p>It is extremely good at what it does.</p>
+
+<p><a href="https://github.com/colbyn/imager-bench-2019-11-2" target="_blank">Compression Benchmarks</a></p>
+<pre>source        : ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 39.00M (4 images)
+kraken.io     : ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 24M
+jpegmini.com  : ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 16M
+compression.ai: ▇▇▇▇▇▇▇▇ 8.90M
+imager        : ▇▇▇▇ 4.20M</pre>
+
+
+<p>Sub Projects</p>
+
+
+
+<ul>
+<li>
+    <a href="https://github.com/imager-io/imager-io-js" target="_blank">imager-io/imager-io-js</a>: Imager for JavaScript (NodeJS) - Site performance tools for efficiently distributing media on the web. This project demonstrates my ability to call rust code from the NodeJS runtime. 
+</li>
+<li>
+    <a href="https://github.com/imager-io/webp-dev-rs" target="_blank">imager-io/webp-dev-rs</a>: Rust bindings to libwebp, libwebpdemux, and workarounds for static/inline C functions and some other miscellaneous stuff.
+</li>
+<li>
+    <a href="https://github.com/imager-io/ffmpeg-dev-rs" target="_blank">imager-io/ffmpeg-dev-rs</a>: Rust - Self Contained FFmpeg Bindings. Not recommend for beginners. This library isn’t safe nor idiomatic rust, a consequence offering direct bindings to the FFmpeg C APIs. This was a very difficult to get working.
+</li>
+<li>
+    <a href="https://github.com/imager-io/x264-dev" target="_blank">imager-io/x264-dev</a>: Self contained rust binding to libx264. I.e. no system and network dependencies. Painstakingly transferred doc comments from the C header files to the rust API.
+</li>
+<li>
+    <a href="https://github.com/colbyn/vmaf-sys" target="_blank">colbyn/vmaf-sys</a>: Rust VMAF FFI.
+    <br>
+    <b>VMAF</b> is an Emmy-winning perceptual video quality assessment algorithm developed by Netflix. 
+</li>
+</ul>

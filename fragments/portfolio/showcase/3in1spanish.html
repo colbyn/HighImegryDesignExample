@@ -1,0 +1,189 @@
+<h2 class="center bordered">My Bilingual Dictionary & Phrasebook App</h2>
+
+<h3>App Overview</h3>
+
+<h4 class="center">The Dictionary</h4>
+<div class="scroll-container">
+    <picture>
+        <source
+            srcset="../../../assets/images/screenshots/3in1-spanish/2025-7-11.dictionary-example-1.ipad.dark-mode.PNG"
+            media="(prefers-color-scheme: dark)">
+        <source
+            srcset="../../../assets/images/screenshots/3in1-spanish/2025-7-11.dictionary-example-1.ipad.light-mode.PNG"
+            media="(prefers-color-scheme: light)">
+        <img src="../../../assets/images/screenshots/3in1-spanish/2025-7-11.dictionary-example-1.ipad.light-mode.PNG"
+            alt="Themed Image">
+    </picture>
+</div>
+
+<h4 class="center">The Phrasebook</h4>
+<div class="scroll-container">
+    <picture>
+        <source
+            srcset="../../../assets/images/screenshots/3in1-spanish/2025-7-11.phrasebook-example-1.ipad.dark-mode.PNG"
+            media="(prefers-color-scheme: dark)">
+        <source
+            srcset="../../../assets/images/screenshots/3in1-spanish/2025-7-11.phrasebook-example-1.ipad.light-mode.PNG"
+            media="(prefers-color-scheme: light)">
+        <img src="../../../assets/images/screenshots/3in1-spanish/2025-7-11.phrasebook-example-1.ipad.light-mode.PNG"
+            alt="Themed Image">
+    </picture>
+</div>
+
+<div class="scroll-container">
+    <img class="feature" src="../../../assets/images/screenshots/3in1-spanish/example-3-focus.PNG">
+</div>
+
+<h3>Inside the 3in1Spanish Dataset Compiler</h3>
+
+<p class="note floating">
+    See my <a href="https://youtu.be/nofJLw51xSk?si=WrOwCT7WA6_VTBrO">YouTube Video</a> for details with commentary.
+</p>
+
+<p><strong>What if generating a bilingual dictionary and phrasebook wasn't about writing static content by hand, but
+        compiling it — like code?</strong> That’s the idea behind my 3in1Spanish app, a fully offline-native iOS/macOS
+    app that bundles a dictionary, phrasebook, and flashcards into a single lightweight tool.</p>
+
+<p>At its core is a dataset pipeline inspired by compiler design, not scraping or prompt spam. This post dives into how
+    the system works, what problems it solves, and why it’s built to scale.</p>
+
+<h4>Motivation</h4>
+<p>There are tons of language apps — but they usually either:</p>
+<ul>
+    <li>Rely on huge editorial teams for content</li>
+    <li>Depend on fragile scraping pipelines</li>
+    <li>Require online access to fetch data</li>
+</ul>
+<p>I wanted something different:</p>
+<ul>
+    <li>Fully offline</li>
+    <li>Fully scalable (10 → 10M entries)</li>
+    <li>Generated programmatically</li>
+    <li>Modular, inspectable, and cache-friendly</li>
+</ul>
+<p>Thus: a compiler-style LLM pipeline.</p>
+
+<h4>Input: Raw Source Text (EPUBs)</h4>
+<p>The source input is clean digital books — primarily EPUBs. These are ZIP-archives of structured HTML chapters,
+    usually with cleaner markup than scraped websites.</p>
+<p>I parse the HTML, normalize it, and feed it through deterministic preprocessors that extract usable text for
+    downstream phrase mining.</p>
+
+<h4>Architecture: A Compiler for Language Data</h4>
+<p>The pipeline has multiple stages, loosely inspired by compilers:</p>
+<ol>
+    <li>
+        <strong>Preprocessing</strong>
+        <ul>
+            <li>Extracts and cleans source sentences</li>
+            <li>Normalizes punctuation, line breaks, headings</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Phrase Mining</strong>
+        <ul>
+            <li>LLM extracts semantically useful phrases (e.g. greetings, common patterns)</li>
+            <li>Outputs structured JSON arrays</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Metadata Generation</strong>
+        <ul>
+            <li>For each phrase or word:
+                <ul>
+                    <li>English translation</li>
+                    <li>IPA + simplified pronunciation</li>
+                    <li>Grammar category</li>
+                    <li>Notes on silent letters or irregularities</li>
+                    <li>Regional variation info</li>
+                    <li>Syllabification (for TTS/fallback)</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Categorization & Tagging</strong>
+        <ul>
+            <li>LLM suggests category cluster (e.g. food, travel)</li>
+            <li>Tag-based sorting for UI</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Dictionary Compilation</strong>
+        <ul>
+            <li>Lemmas + inflected forms</li>
+            <li>Disambiguates homographs</li>
+            <li>Long/short definition pairs</li>
+            <li>Example usage with glosses</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Flashcard Export</strong>
+        <ul>
+            <li>JSON entries exported into spaced-repetition-ready format</li>
+        </ul>
+    </li>
+</ol>
+
+<h4>Retry, Repair, and Idempotency</h4>
+<p>This isn’t just prompt → response → save.</p>
+<p>The system validates LLM output against schemas. If JSON is malformed, it attempts:</p>
+<ul>
+    <li>Auto-repair (via Mistral or system prompt reset)</li>
+    <li>Conversational correction</li>
+    <li>Retry with fallback prompt variants</li>
+</ul>
+<p>Each content unit (phrase, word, definition) is identity-tracked, cached, and compiled independently. If you delete
+    or edit an entry, only its downstream dependencies are invalidated.</p>
+
+<h4>Output: SQLite Database</h4>
+<p>Final output is stored as a SQLite DB and bundled into the iOS/macOS app. This allows:</p>
+<ul>
+    <li>Instant local access</li>
+    <li>No network dependencies</li>
+    <li>App-side fallbacks (e.g. show alt forms if IPA missing)</li>
+</ul>
+
+<h4>Stack</h4>
+<ul>
+    <li><strong>Rust</strong> — pipeline logic, prompt orchestration, compilation</li>
+    <li><strong>Swift/SwiftUI</strong> — app frontend</li>
+    <li><strong>SQLite</strong> — offline dataset storage</li>
+    <li><strong>LLMs</strong> — OpenAI GPT-3.5, Mistral, Claude (experimental)</li>
+    <li><strong>Prompt DSL</strong> — an XML-inspired macro system for structured LLM interactions</li>
+</ul>
+
+
+<h4>Generalization Potential</h4>
+<p>Although I built this for Spanish-English, the pipeline is language-agnostic. With minor changes, it could generate:
+</p>
+<ul>
+    <li>Medical glossaries</li>
+    <li>Legal term dictionaries</li>
+    <li>Niche phrasebooks (e.g. aviation, military, religious)</li>
+    <li>Low-resource language datasets</li>
+</ul>
+<p>It’s not just a phrasebook — it’s a general-purpose <strong>bilingual content compiler</strong>.</p>
+
+<h4>Status & Future</h4>
+<p>The current app works. The dataset pipeline is fully operational and idempotent. The UI is lightweight but
+    serviceable.</p>
+<p>Next steps:</p>
+<ul>
+    <li>Polish flashcard interaction</li>
+    <li>Add fuzzy search + transliteration</li>
+    <li>Expand prompt set for rarer parts of speech</li>
+    <li>Expose the compiler as a CLI tool</li>
+</ul>
+
+<h4>Interested?</h4>
+<p>If you work in:</p>
+<ul>
+    <li>EdTech</li>
+    <li>Localization</li>
+    <li>NLP toolchains</li>
+    <li>AI-powered language learning</li>
+</ul>
+<p>…then I’d love to connect.</p>
+<p>I'm especially interested in contract or freelance opportunities where this infrastructure — or its generalizations —
+    can save teams time and money on multilingual content.</p>

@@ -1,0 +1,116 @@
+<h1 class="title">
+    <span class="outline">
+      <a href="https://github.com/subscript-publishing/subscript-html" target="_blank">subscript-html</a>
+    </span>
+    The Subscript Legacy HTML ToolChain - Content Publishing using Web Technologies
+</h1>
+
+<img alt="image preview" src="../../../assets/images/legacy/subscript-html/desmos-preview.png" class="floating">
+
+<h2>General Features:</h2>
+<ul>
+  <li><input type="checkbox" checked disabled> Rust Macros</li>
+  <li><input type="checkbox" checked disabled> Macros VIA a <em>simple</em> embedded scripting language that supports WebAssembly (<a href="https://github.com/subscript-publishing/subscript/blob/master/examples/school-notes/plugins/desmos1.rhai">Example</a>)</li>
+  <li><input type="checkbox" disabled> Unicode Prettification (E.g. convert &quot;Lorem&quot; to “lorem” and ... to …)</li>
+  <li><input type="checkbox" disabled> Macros VIA <em>some more mainstream</em> embedded scripting language (ideally one that is sandboxed such as Deno)</li>
+  <li><input type="checkbox" disabled> Paged Media Support</li>
+  <li><input type="checkbox" disabled> PDF Rendering (dependent on <code>Paged Media Support</code> for native page handling)</li>
+</ul>
+
+<h3>Supported Content Using Subscript's Macro System</h3>
+
+<ul>
+  <li><strong>Include Files:</strong>
+    <pre><code class="language-html">&lt;include src=&quot;../template/base.html&quot;&gt;
+    &lt;h1&gt;My Book&lt;/h1&gt;
+    
+    &lt;include src=&quot;../content/chapter1.html&quot;&gt;&lt;/include&gt;
+    &lt;include src=&quot;../content/chapter2.html&quot;&gt;&lt;/include&gt;
+    &lt;include src=&quot;../content/chapter3.html&quot;&gt;&lt;/include&gt;
+
+    &lt;!--
+      NOTE: SEE HTML SYNTAX HIGHLIGHTING EXTENSION FOR VS-CODE
+         (MAKES MIXING LATEX/HTML MORE BEARABLE)
+    --&gt;
+    &lt;h2&gt;Graph of &lt;tex&gt;y = x^2&lt;/tex&gt;&lt;/h2&gt;
+    &lt;desmos&gt;
+        &lt;expr&gt;y = x^2&lt;/expr&gt;
+    &lt;/desmos&gt;
+&lt;/include&gt;</code></pre>
+  </li>
+
+  <li><strong>Graphing</strong> (still being moved over from the <a href="https://github.com/colbyn/subscript/blob/master/src/macros.rs#L258">original implementation of the Desmos macro</a>, unless you use e.g. <a href="https://github.com/subscript-publishing/subscript/blob/master/examples/school-notes/plugins/desmos1.rhai">this plugin</a> (not as customizable)):
+    <pre><code class="language-html">&lt;desmos&gt;
+    &lt;expr&gt;y = x^2&lt;/expr&gt;
+&lt;/desmos&gt;</code></pre>
+  </li>
+
+  <li><strong>Mathematics:</strong>
+    <pre><code class="language-html">&lt;!--
+  NOTE: SEE HTML SYNTAX HIGHLIGHTING EXTENSION FOR VS-CODE
+      (MAKES MIXING LATEX/HTML MORE BEARABLE)
+--&gt;
+&lt;equation&gt;
+    f \triangleleft x &amp;= f(x) \\
+    x \triangleright f &amp;= f(x) \\
+    |x| &amp;= \sqrt{x^2} \neq x \\
+    |x|^2 &amp;= x^2
+&lt;/equation&gt;</code></pre>
+  </li>
+
+  <li><strong>Lots of simple conveniences</strong> (a lot is still being moved over from the <a href="https://github.com/colbyn/subscript">original implementation</a>):
+    <ul>
+      <li><strong>Layout</strong> (originally called <code>&lt;gallery&gt;</code>):
+        <pre><code class="language-html">&lt;layout columns=&quot;3&quot;&gt;
+  &lt;equation&gt;\delta \sin(x) &amp;= \cos(x)&lt;/equation&gt;
+  &lt;equation&gt;\delta \cos(x) &amp;= -\sin(x)&lt;/equation&gt;
+  &lt;equation&gt;\delta \tan(x) &amp;= \sec^2(x)&lt;/equation&gt;
+  &lt;equation&gt;\delta \csc(x) &amp;= -\cot(x)\csc(x)&lt;/equation&gt;
+  &lt;equation&gt;\delta \sec(x) &amp;= \tan(x)\sec(x)&lt;/equation&gt;
+  &lt;equation&gt;\delta \cot(x) &amp;= -\csc^2(x)&lt;/equation&gt;
+&lt;/layout&gt;</code></pre>
+      </li>
+      <li><strong>List:</strong>
+        <pre><code class="language-html">&lt;list&gt;
+  &lt;p&gt;Lemon drops sweet roll cupcake biscuit cookie. Ice cream pie apple pie fruitcake dessert sweet roll chocolate bar.&lt;/p&gt;
+  &lt;p&gt;Sesame snaps lollipop marshmallow marzipan&lt;/p&gt;
+&lt;/list&gt;</code></pre>
+      </li>
+      <li><strong>Table of Contents Generator:</strong>
+        <pre><code class="language-html">&lt;toc&gt;&lt;/toc&gt;</code></pre>
+        <p>Regarding the <code>&lt;toc&gt;</code> macro, this also works with <code>&lt;include&gt;</code>'d content, thanks to how Subscript processes macros in a bottom-up manner<sup>(unlike PostHTML + Parcel, which drove me crazy)</sup>.</p>
+      </li>
+      <li><strong>Ad-hoc Styling</strong> | This targets the parent node with a unique CSS class name:
+        <pre><code class="language-html">&lt;style self&gt;
+    self {
+        display: grid;
+        /* ... */
+    }
+    @media (max-width: 900px) {
+        self {
+            grid-template-columns: 1fr;
+        }
+    }
+&lt;/style&gt;</code></pre>
+      </li>
+      <li><strong>Images from a file glob [TODO]:</strong>
+        <pre><code class="language-html">&lt;asset-glob src=&quot;../static/images/chapter1/*.png&quot;&gt;
+    &lt;layout columns=&quot;2&quot;&gt;&lt;content&gt;&lt;/content&gt;&lt;/layout&gt;
+&lt;/asset-glob&gt;</code></pre>
+        <p>This pattern was very common with my <a href="https://colbyn.github.io/subscript/calc1/chapter6.html">old school notes</a>, where I could include <a href="https://colbyn.github.io/subscript/calc1/chapter6.html#2681476879558479754">screenshots</a> of all the essential definitions from a given chapter.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Versatility in Subscript is made possible VIA macros, the syntax is akin to web components, but it's expanded out at <strong>compile time</strong>, instead of at runtime (i.e. a macro).</p>
+
+<h2>Math Preview:</h2>
+
+<img alt="Preview" src="../../../assets/images/legacy/subscript-html/preview.png" class="floating">
+
+<p>Comes with a syntax highlighting extension for VS Code.</p>
+
+<img alt="VS-Code Preview" src="../../../assets/images/legacy/subscript-html/preview-vscode-plugin.png" class="floating">
+
+<p>It injects the LaTeX grammar from <a href="https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop">latex-workshop</a> into the <code>&lt;tex&gt;</code>, <code>&lt;texblock&gt;</code> and the <code>&lt;equation&gt;</code> html tags.</p>
