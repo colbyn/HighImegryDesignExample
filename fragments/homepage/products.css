@@ -6,17 +6,18 @@ html, body {
     overflow-x: hidden;
 }
 
-section {
+main section {
     position: relative;
     margin: clamp(1rem, 6vw, 2rem) auto;
     padding: 0 clamp(.75rem, 3vw, 1.25rem);
     max-width: 1100px;
     box-sizing: border-box;
     isolation: isolate;
+    margin-bottom: 0;
 }
 
 /* Defaults */
-section {
+main section {
     --r: -1deg;
     --x: -1%;
     --y: 1%;
@@ -32,7 +33,7 @@ section {
 }
 
 /* Image */
-section img {
+main section img {
     display: block;
     width: 100%;
     height: auto;
@@ -41,48 +42,47 @@ section img {
     transform-origin: 50% 50%;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
     pointer-events: none;
-    border: 3px solid #8f95a1a1;
-    box-shadow: 0 0 6px 0px #000000;
+    border: 2px solid #ffffff9e;
+    box-shadow: 0 0 6px 2px #000000;
 }
 
 /* Overlay card */
-section .text-block {
+main section .text-block {
     position: absolute;
     left: var(--cardL);
     right: var(--cardR);
     bottom: var(--cardB);
     margin: 0;
-    background: rgb(0 0 0 / 28%);
+    background: rgb(205 115 18 / 13%);
     color: var(--ink);
     padding: clamp(.9rem, 3.5vw, 1.2rem);
     border-radius: calc(var(--radius) - 4px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
+    box-shadow: 0 0 3px 1px rgb(0 0 0 / 76%);
     z-index: 1;
-    border: 0.5px solid;
-    border-color: #5b5b5b;
+    border: 1px solid #af9677;
     backdrop-filter: blur(5px) brightness(0.5) grayscale(1);
 }
 
 /* Type */
-section .text-block header h1 {
+main section .text-block header h1 {
     margin: 0 0 .3rem 0;
     font-size: clamp(1.6rem, 7vw, 2.4rem);
     line-height: .95;
     letter-spacing: -0.015em;
 }
 
-section .text-block header p {
+main section .text-block header p {
     margin: 0 0 .5rem 0;
     color: var(--ink-dim);
     font-size: clamp(.95rem, 3.6vw, 1.05rem);
 }
 
-section .text-block>p {
+main section .text-block>p {
     margin: 0;
     font-size: clamp(.95rem, 3.6vw, 1.05rem);
 }
 
-section.centered .text-block {
+main section.centered .text-block {
     left: 50%;
     right: auto;
     bottom: 50%;
@@ -91,12 +91,12 @@ section.centered .text-block {
     text-align: center;
 }
 
-section.centered .text-block p {
+main section.centered .text-block p {
     text-align: center;
 }
 
 /* Subtle per-section variation */
-section:nth-of-type(1) {
+main section:nth-of-type(1) {
     --r: -1.2deg;
     --x: -2%;
     --y: 0%;
@@ -105,7 +105,7 @@ section:nth-of-type(1) {
     --cardB: 7%;
 }
 
-section:nth-of-type(2) {
+main section:nth-of-type(2) {
     --r: 1deg;
     --x: 2%;
     --y: 2%;
@@ -114,7 +114,7 @@ section:nth-of-type(2) {
     --cardB: 8%;
 }
 
-section:nth-of-type(3) {
+main section:nth-of-type(3) {
     --r: -.8deg;
     --x: -1%;
     --y: 0%;
@@ -123,7 +123,7 @@ section:nth-of-type(3) {
     --cardB: 10%;
 }
 
-section:nth-of-type(4) {
+main section:nth-of-type(4) {
     --r: 1deg;
     --x: 2%;
     --y: -1%;
@@ -132,7 +132,7 @@ section:nth-of-type(4) {
     --cardB: 9%;
 }
 
-section:nth-of-type(5) {
+main section:nth-of-type(5) {
     --r: -1deg;
     --x: -2%;
     --y: 1%;
