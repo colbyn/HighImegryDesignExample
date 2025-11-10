@@ -12,6 +12,7 @@
   position: relative;
   box-shadow: 0 2px 4px 2px #000000b1;
   border-bottom: 1px solid #ffffff2e;
+  margin-bottom: 4rem;
 }
 
 .hero.wrapper .v-stack {
