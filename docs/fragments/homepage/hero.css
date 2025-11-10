@@ -55,8 +55,8 @@
 }
 
 :root {
-  --base: 88%;
-  --tip: 98%;
+  --base: 97%;
+  --tip: 100%;
 }
 
 @media (width >= 1024px) {

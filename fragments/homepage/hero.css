@@ -66,8 +66,8 @@
 
 /* Global depth controls */
 :root{
-  --base: 88%; /* where teeth start */
-  --tip:  98%; /* tooth tips */
+  --base: 97%; /* where teeth start */
+  --tip:  100%; /* tooth tips */
 }
 
 /* Desktop ≥1024px: ~22 teeth */
