@@ -8,6 +8,8 @@
   background-size: cover;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+  position: relative;
 }
 
 .hero.wrapper .v-stack {
@@ -21,7 +23,8 @@
   text-shadow: 0 0 8px #000;
   text-align: center;
   z-index: 2;
-  padding: 0 3rem;
+  padding: 0 5rem;
+  color: #fff;
 }
 
 .hero.wrapper p {
@@ -32,7 +35,7 @@
   font-size: 1rem;
   color: #fff;
   font-size: 2rem;
-  height: 14rem;
+  height: 10rem;
   text-shadow: 0 0 8px #000;
 }
 
@@ -48,5 +51,31 @@
 .hero.wrapper .mouse-icon {
   max-width: max-content;
   position: absolute;
-  bottom: 1rem;
+  bottom: 10vh;
+}
+
+:root {
+  --base: 88%;
+  --tip: 98%;
+}
+
+@media (width >= 1024px) {
+  .hero.wrapper {
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% var(--base), 95.5% var(--tip), 91% var(--base), 86.5% var(--tip), 82% var(--base), 77.5% var(--tip), 73% var(--base), 68.5% var(--tip), 64% var(--base), 59.5% var(--tip), 55% var(--base), 50.5% var(--tip), 46% var(--base), 41.5% var(--tip), 37% var(--base), 32.5% var(--tip), 28% var(--base), 23.5% var(--tip), 19% var(--base), 14.5% var(--tip), 10% var(--base), 5.5% var(--tip), 0% var(--base), 0% 0%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% var(--base), 95.5% var(--tip), 91% var(--base), 86.5% var(--tip), 82% var(--base), 77.5% var(--tip), 73% var(--base), 68.5% var(--tip), 64% var(--base), 59.5% var(--tip), 55% var(--base), 50.5% var(--tip), 46% var(--base), 41.5% var(--tip), 37% var(--base), 32.5% var(--tip), 28% var(--base), 23.5% var(--tip), 19% var(--base), 14.5% var(--tip), 10% var(--base), 5.5% var(--tip), 0% var(--base), 0% 0%);
+  }
+}
+
+@media (width >= 600px) and (width <= 1023px) {
+  .hero.wrapper {
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% var(--base), 96.4% var(--tip), 92.8% var(--base), 89.2% var(--tip), 85.6% var(--base), 82% var(--tip), 78.4% var(--base), 74.8% var(--tip), 71.2% var(--base), 67.6% var(--tip), 64% var(--base), 60.4% var(--tip), 56.8% var(--base), 53.2% var(--tip), 49.6% var(--base), 46% var(--tip), 42.4% var(--base), 38.8% var(--tip), 35.2% var(--base), 31.6% var(--tip), 28% var(--base), 24.4% var(--tip), 20.8% var(--base), 17.2% var(--tip), 13.6% var(--base), 10% var(--tip), 6.4% var(--base), 2.8% var(--tip), 0% var(--base), 0% 0%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% var(--base), 96.4% var(--tip), 92.8% var(--base), 89.2% var(--tip), 85.6% var(--base), 82% var(--tip), 78.4% var(--base), 74.8% var(--tip), 71.2% var(--base), 67.6% var(--tip), 64% var(--base), 60.4% var(--tip), 56.8% var(--base), 53.2% var(--tip), 49.6% var(--base), 46% var(--tip), 42.4% var(--base), 38.8% var(--tip), 35.2% var(--base), 31.6% var(--tip), 28% var(--base), 24.4% var(--tip), 20.8% var(--base), 17.2% var(--tip), 13.6% var(--base), 10% var(--tip), 6.4% var(--base), 2.8% var(--tip), 0% var(--base), 0% 0%);
+  }
+}
+
+@media (width <= 599px) {
+  .hero.wrapper {
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% var(--base), 93.75% var(--tip), 87.5% var(--base), 81.25% var(--tip), 75% var(--base), 68.75% var(--tip), 62.5% var(--base), 56.25% var(--tip), 50% var(--base), 43.75% var(--tip), 37.5% var(--base), 31.25% var(--tip), 25% var(--base), 18.75% var(--tip), 12.5% var(--base), 6.25% var(--tip), 0% var(--base), 0% 0%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% var(--base), 93.75% var(--tip), 87.5% var(--base), 81.25% var(--tip), 75% var(--base), 68.75% var(--tip), 62.5% var(--base), 56.25% var(--tip), 50% var(--base), 43.75% var(--tip), 37.5% var(--base), 31.25% var(--tip), 25% var(--base), 18.75% var(--tip), 12.5% var(--base), 6.25% var(--tip), 0% var(--base), 0% 0%);
+  }
 }
