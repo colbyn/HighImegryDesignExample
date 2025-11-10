@@ -1,7 +1,7 @@
 .hero.wrapper {
   background-image: url("../../assets/photos/bg-home.jpg");
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   background-repeat: no-repeat;
   background-position: center;
