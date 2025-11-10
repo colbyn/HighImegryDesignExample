@@ -10,6 +10,7 @@
     align-items: center;
     z-index: 1;
     position: relative;
+    box-shadow: inset 0px -30px 10px 3px #000000e3;
 }
 
 .hero.wrapper .v-stack {
