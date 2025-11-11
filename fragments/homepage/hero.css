@@ -28,7 +28,7 @@
     text-align: center;
     text-transform: uppercase;
     z-index: 2;
-    padding: 0 5rem;
+    padding: 0 3rem;
     color: #fff;
     overflow-wrap: anywhere;
 }
@@ -41,7 +41,7 @@
     font-size: 1rem;
     color: #fff;
     font-size: 2rem;
-    height: 12rem;
+    height: 15rem;
     text-shadow: 0 0 8px #000000;
 }
 
