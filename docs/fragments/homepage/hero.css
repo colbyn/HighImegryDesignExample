@@ -22,12 +22,15 @@
 
 .hero.wrapper h1 {
   font-size: clamp(4rem, 12vw + 1rem, 10rem);
+  font-weight: 900;
   letter-spacing: clamp(.05em, 1vw, .6em);
   text-shadow: 0 0 8px #000;
   text-align: center;
+  text-transform: uppercase;
   z-index: 2;
   padding: 0 5rem;
   color: #fff;
+  overflow-wrap: anywhere;
 }
 
 .hero.wrapper p {
@@ -38,7 +41,7 @@
   font-size: 1rem;
   color: #fff;
   font-size: 2rem;
-  height: 10rem;
+  height: 12rem;
   text-shadow: 0 0 8px #000;
 }
 
@@ -54,5 +57,5 @@
 .hero.wrapper .mouse-icon {
   max-width: max-content;
   position: absolute;
-  bottom: 10vh;
+  bottom: 5dvh;
 }

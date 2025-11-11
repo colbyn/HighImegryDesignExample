@@ -2,27 +2,8 @@
 /* ROOT DESIGN */
 /* ------------------------------------------------------------------------- */
 
-html,
-body {
-    background: #1e1e1e;
-    background-image: linear-gradient(
-    0deg,
-    hsl(221deg 27% 20%) 0%,
-    hsl(222deg 24% 22%) 7%,
-    hsl(223deg 22% 23%) 14%,
-    hsl(224deg 20% 25%) 21%,
-    hsl(225deg 18% 26%) 29%,
-    hsl(226deg 16% 28%) 36%,
-    hsl(227deg 15% 29%) 43%,
-    hsl(229deg 13% 31%) 50%,
-    hsl(229deg 16% 30%) 57%,
-    hsl(229deg 18% 29%) 64%,
-    hsl(229deg 21% 28%) 71%,
-    hsl(229deg 24% 28%) 79%,
-    hsl(229deg 27% 27%) 86%,
-    hsl(229deg 30% 26%) 93%,
-    hsl(229deg 33% 25%) 100%
-  );
+html, body {
+    background: #17191f;
 }
 
 main > *:first-child {
