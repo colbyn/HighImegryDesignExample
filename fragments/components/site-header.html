@@ -1,5 +1,5 @@
 <header class="floating">
-    <button class="open-nav" style="padding-bottom: 4px;">☰</button>
+    <button id="menu-btn" class="open-nav" style="padding-bottom: 4px;">☰</button>
 </header>
 
 <style>
@@ -33,3 +33,9 @@ header.floating button.open-nav.tap {
 }
 </style>
 
+
+<script>
+document.getElementById('menu-btn').addEventListener('click', () => {
+    document.querySelector('nav.site-full-width').classList.toggle('open');
+});
+</script>
