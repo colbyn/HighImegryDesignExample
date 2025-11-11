@@ -9,7 +9,7 @@ header.floating {
     left: 0;
     right: 0;
     margin: 1.0rem;
-    z-index: 2;
+    z-index: 4;
 }
 
 header.floating button.open-nav {
@@ -35,7 +35,41 @@ header.floating button.open-nav.tap {
 
 
 <script>
-document.getElementById('menu-btn').addEventListener('click', () => {
-    document.querySelector('nav.site-full-width').classList.toggle('open');
-});
+(() => {
+  const btn = document.getElementById('menu-btn');
+  const nav = document.querySelector('nav.site-full-width');
+  let scrollY = 0;
+
+  function openNav() {
+    scrollY = window.scrollY || document.documentElement.scrollTop;
+    nav.classList.add('open');
+    document.documentElement.classList.add('nav-open');
+    document.body.classList.add('scroll-lock');
+    document.body.style.top = `-${scrollY}px`;
+  }
+
+  function closeNav() {
+    nav.classList.remove('open');
+    document.documentElement.classList.remove('nav-open');
+    document.body.classList.remove('scroll-lock');
+    const y = Math.abs(parseInt(document.body.style.top || '0', 10)) || 0;
+    document.body.style.top = '';
+    window.scrollTo(0, y);
+  }
+
+  btn.addEventListener('click', () => {
+    nav.classList.contains('open') ? closeNav() : openNav();
+  });
+
+  // Close on ESC
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) closeNav();
+  });
+
+  // Optional: close when a nav link is clicked
+  nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (a) closeNav();
+  });
+})();
 </script>

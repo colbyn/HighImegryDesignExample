@@ -35,3 +35,19 @@ main > *:last-child {
 /* ------------------------------------------------------------------------- */
 /* CONTENT LAYOUT */
 /* ------------------------------------------------------------------------- */
+
+
+/* Scroll lock */
+:root.nav-open {
+  overflow: hidden;           /* desktop + Android */
+  overscroll-behavior: none;
+}
+
+body.scroll-lock {
+  position: fixed;            /* iOS-proof */
+  inset: 0;
+  width: 100%;
+  overflow: hidden;
+  touch-action: none;
+}
+
