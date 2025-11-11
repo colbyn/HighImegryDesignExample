@@ -25,37 +25,37 @@
   <link rel="stylesheet" type="text/css" href="fragments/homepage/products.css">
   <style>
   header.floating {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: 1.0rem;
-    z-index: 4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 1rem;
+  z-index: 4;
   }
 
   header.floating button.open-nav {
-    color: #fff;
-    font-size: 2rem;
-    padding: 0.1rem 0.8rem;
-    transition: background 1.25s ease, color 1.25s ease, box-shadow 1.25s ease;
-    -webkit-tap-highlight-color: transparent;
-    border-radius: 0.5rem;
-    outline: 1px solid #000;
-    border: 1px solid #7f7f7f;
-    box-shadow: 0 0 1px 0px #000;
-    background: linear-gradient(to bottom, rgb(69 72 77 / 85%) 0%, rgb(0 0 0 / 89%) 100%);
+  color: #fff;
+  font-size: 2rem;
+  padding: 0.1rem 0.8rem;
+  transition: background 1.25s ease, color 1.25s ease, box-shadow 1.25s ease;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 0.5rem;
+  outline: 1px solid #000;
+  border: 1px solid #7f7f7f;
+  box-shadow: 0 0 1px 0px #000;
+  background: linear-gradient(to bottom, rgb(69 72 77 / 85%) 0%, rgb(0 0 0 / 89%) 100%);
   }
 
   header.floating button.open-nav:active,
   header.floating button.open-nav.tap {
-    background: #fff;
-    color: #000;
-    box-shadow: 0 0 10px 2px #fff;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 10px 2px #fff;
   }
   </style>
 </head>
 <body>
-  <nav class="site-full-width">
+  <nav id="site-nav" class="site-full-width">
     <div class="container">
       <div class="primary">
         <ul class="menu">
@@ -80,6 +80,7 @@
         </ul>
       </div>
       <div class="secondary">
+        <p>Contact</p>
         <ul class="contact">
           <li>
             <a href="mailto:contact@example.com">contact@example.com</a>
@@ -88,13 +89,20 @@
             <a href="tel:+1-000-000-0000">(000) 000-0000</a>
           </li>
         </ul>
+        <p>Social</p>
         <ul class="external">
+          <li>
+            <a href="https://www.example.com">Twitter⧸X</a>
+          </li>
           <li>
             <a href="https://www.example.com">Facebook</a>
           </li>
           <li>
             <a href="https://www.example.com">Instagram</a>
           </li>
+        </ul>
+        <p>Newsletter</p>
+        <ul class="external">
           <li>
             <a href="https://www.example.com">SubStack</a>
           </li>
@@ -103,24 +111,25 @@
     </div>
   </nav>
   <header class="floating">
-    <button id="menu-btn" class="open-nav" style="padding-bottom: 4px;">☰</button>
+    <button id="menu-btn" class="open-nav" aria-expanded="false" style="padding-bottom:4px;">☰</button>
   </header>
   <script>
   (() => {
   const btn = document.getElementById('menu-btn');
-  const nav = document.querySelector('nav.site-full-width');
-  let scrollY = 0;
+  const nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
 
-  function openNav() {
-    scrollY = window.scrollY || document.documentElement.scrollTop;
-    nav.classList.add('open');
+  let scrollY = 0;
+  let closing = false;
+
+  function lockScroll() {
+    scrollY = window.scrollY || document.documentElement.scrollTop || 0;
     document.documentElement.classList.add('nav-open');
     document.body.classList.add('scroll-lock');
     document.body.style.top = `-${scrollY}px`;
   }
 
-  function closeNav() {
-    nav.classList.remove('open');
+  function unlockScroll() {
     document.documentElement.classList.remove('nav-open');
     document.body.classList.remove('scroll-lock');
     const y = Math.abs(parseInt(document.body.style.top || '0', 10)) || 0;
@@ -128,16 +137,39 @@
     window.scrollTo(0, y);
   }
 
+  function openNav() {
+    if (nav.classList.contains('open')) return;
+    nav.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    lockScroll();
+  }
+
+  function closeNav() {
+    if (!nav.classList.contains('open') || closing) return;
+    closing = true;
+    nav.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+
+    // wait for the slide-out to finish before unlocking scroll
+    const onEnd = (e) => {
+      if (e.propertyName !== 'transform') return;
+      nav.removeEventListener('transitionend', onEnd);
+      closing = false;
+      unlockScroll();
+    };
+    nav.addEventListener('transitionend', onEnd);
+  }
+
   btn.addEventListener('click', () => {
+    btn.classList.add('tap');
+    setTimeout(() => btn.classList.remove('tap'), 150);
     nav.classList.contains('open') ? closeNav() : openNav();
   });
 
-  // Close on ESC
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && nav.classList.contains('open')) closeNav();
   });
 
-  // Optional: close when a nav link is clicked
   nav.addEventListener('click', (e) => {
     const a = e.target.closest('a');
     if (a) closeNav();
