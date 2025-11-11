@@ -26,104 +26,116 @@
   <style>
   /* Minimal, email-field-first mobile layout. Inline-able if needed. */
   .nl-form {
-  --nl-fg: #e6e6e6;
-  --nl-muted: #c5c5c5;
-  --nl-accent: #61dafb;
-  --nl-border: #2a2f3a;
-  color: var(--nl-fg);
-  border-radius: 3px;
-  max-width: 480px;
-  display: grid;
-  gap: 10px;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
-  border-left: 2px solid #999999;
-  padding-left: 8px;
-  border-radius: 0;
+    --nl-fg: #e6e6e6;
+    --nl-muted: #c5c5c5;
+    --nl-accent: #61dafb;
+    --nl-border: #2a2f3a;
+    color: var(--nl-fg);
+    border-radius: 3px;
+    max-width: 480px;
+    display: grid;
+    gap: 10px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+    border-left: 2px solid #999999;
+    padding-left: 8px;
+    border-radius: 0;
   }
 
   .nl-title {
-  margin: 0 0 4px 0;
-  font-size: 1.125rem;
-  line-height: 1.3;
+    margin: 0 0 4px 0;
+    font-size: 1.125rem;
+    line-height: 1.3;
   }
 
   .nl-label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  clip-path: inset(50%);
-  border: 0;
-  padding: 0;
-  margin: -1px;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
+    padding: 0;
+    margin: -1px;
   }
 
   .nl-input {
-  width: 100%;
-  color: var(--nl-fg);
-  border: 1px solid var(--nl-border);
-  border-radius: 3px;
-  padding: 12px 12px;
-  font-size: 0.95rem;
-  outline: none;
-  background: #00000061;
+    width: 100%;
+    color: var(--nl-fg);
+    border: 1px solid var(--nl-border);
+    border-radius: 3px;
+    padding: 12px 12px;
+    font-size: 0.95rem;
+    outline: none;
+    background: #00000061;
   }
-  .nl-input::placeholder { color: #768199; }
+
+  .nl-input::placeholder {
+    color: #768199;
+  }
 
   .nl-input:focus {
-  border-color: var(--nl-accent);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--nl-accent) 25%, transparent);
+    border-color: var(--nl-accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--nl-accent) 25%, transparent);
   }
 
   .nl-consent {
-  display: flex;
-  align-items: start;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: var(--nl-muted);
-  background: #00000061;
+    display: flex;
+    align-items: start;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--nl-muted);
+    background: #00000061;
   }
-  .nl-consent input { transform: translateY(2px); }
+
+  .nl-consent input {
+    transform: translateY(2px);
+  }
 
   .nl-button {
-  cursor: pointer;
-  border: 0;
-  border-radius: 3px;
-  padding: 12px 14px;
-  font-weight: 600;
-  font-size: 0.98rem;
-  color: #fff;
-  background: #00000061;
+    cursor: pointer;
+    border: 0;
+    border-radius: 3px;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: #fff;
+    background: #00000061;
   }
+
   .nl-button:focus-visible {
-  outline: 3px solid color-mix(in oklab, #7fd3ff 40%, transparent);
-  outline-offset: 2px;
+    outline: 3px solid color-mix(in oklab, #7fd3ff 40%, transparent);
+    outline-offset: 2px;
   }
-  .nl-button:active { transform: translateY(1px); }
+
+  .nl-button:active {
+    transform: translateY(1px);
+  }
 
   .nl-help {
-  margin: 0;
-  font-size: 0.82rem;
-  color: var(--nl-muted);
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--nl-muted);
   }
 
   /* Honeypot hidden from users, visible to bots */
   .nl-hp {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
-  .nl-input, .nl-button {
+  .nl-input,
+  .nl-button {
     outline: 1px solid #606060;
     border: 1px solid #000;
   }
 
-  .nl-form p, #nl-privacy {
+  .nl-form p,
+  #nl-privacy {
     transform: unset;
   }
   </style>
@@ -132,7 +144,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   margin: 1rem;
   z-index: 4;
   }
@@ -202,7 +213,7 @@
             <a href="https://www.example.com">SubStack</a>
           </li>
         </ul>
-        <form action="/todo" method="post" class="nl-form" novalidate="">
+        <form class="nl-form">
           <h2 class="nl-title">Subscribe to the newsletter</h2><label class="nl-label" for="nl-name">Name</label>
           <input id="nl-name" name="name" type="text" inputmode="text" autocomplete="name" class="nl-input"
           placeholder="Your name (optional)"> <label class="nl-label" for="nl-email">Email</label> <input id="nl-email"
