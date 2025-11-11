@@ -1,0 +1,63 @@
+.hero.wrapper {
+    background-image: url(../../assets/photos/bg-home.jpg);
+    display: flex;
+    height: 100dvh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+    box-shadow: 0 2px 4px 2px #000000b1;
+    border-bottom: 1px solid #ffffff2e;
+    margin-bottom: 4rem;
+}
+
+.hero.wrapper .v-stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero.wrapper h1 {
+    font-size: clamp(4rem, 12vw + 1rem, 10rem);
+    font-weight: 900;
+    letter-spacing: clamp(0.05em, 1vw, 0.6em);
+    text-shadow: 0 0 8px #000000;
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 2;
+    padding: 0 3rem;
+    color: #fff;
+    overflow-wrap: anywhere;
+}
+
+.hero.wrapper p {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: center;
+    font-size: 1rem;
+    color: #fff;
+    font-size: 2rem;
+    height: 15rem;
+    text-shadow: 0 0 8px #000000;
+}
+
+.hero.wrapper p.leftward {
+    left: 0;
+}
+
+.hero.wrapper p.rightward {
+    right: 0;
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.hero.wrapper .mouse-icon {
+    max-width: max-content;
+    position: absolute;
+    bottom: 5dvh;
+}
+
+

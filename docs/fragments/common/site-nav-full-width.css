@@ -34,6 +34,7 @@ nav.site-full-width ul li {
   font-size: 1.5rem;
   font-weight: 400;
   text-shadow: 0 0 11px #000;
+  color: #fff;
 }
 
 nav.site-full-width ul li a {
@@ -57,6 +58,7 @@ nav.site-full-width ul li a {
   transform: translateX(-1rem);
   font-weight: 200;
   text-transform: uppercase;
+  color: #fff;
 }
 
 .site-full-width .menu li {
