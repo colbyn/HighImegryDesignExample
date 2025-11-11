@@ -4,25 +4,25 @@
 
 <style>
 header.floating {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     margin: 1.5rem;
     z-index: 2;
-    position: absolute;
 }
 
 header.floating button.open-nav {
-    background: #00000075;
     color: #fff;
-    border: 1px solid #ffffff8c;
     font-size: 2rem;
     padding: 0.1rem 0.8rem;
-    box-shadow: 0 0 6px 1px #838383;
-    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    transition: background 1.25s ease, color 1.25s ease, box-shadow 1.25s ease;
     -webkit-tap-highlight-color: transparent;
     border-radius: 0.5rem;
+    outline: 1px solid #000;
+    border: 1px solid #7f7f7f;
+    box-shadow: 0 0 1px 0px #000;
+    background: linear-gradient(to bottom, rgb(69 72 77 / 85%) 0%, rgb(0 0 0 / 89%) 100%);
 }
 
 header.floating button.open-nav:active,
@@ -33,10 +33,3 @@ header.floating button.open-nav.tap {
 }
 </style>
 
-<script>
-const btn = document.querySelector('.open-nav');
-btn.addEventListener('click', () => {
-    btn.classList.add('tap');
-    setTimeout(() => btn.classList.remove('tap'), 150);
-});
-</script>
